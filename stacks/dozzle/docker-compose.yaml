@@ -3,7 +3,8 @@ services:
     image: amir20/dozzle:latest
     restart: unless-stopped
     container_name: dozzle
-    env_file: 
+    env_file:
+      - ../../../.env
       - .env
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock

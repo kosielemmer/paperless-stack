@@ -3,6 +3,7 @@ services:
     image: ollama/ollama:latest
     container_name: ollama
     env_file:
+      - ../../../.env
       - .env
     volumes:
       - ./data/:/root/.ollama

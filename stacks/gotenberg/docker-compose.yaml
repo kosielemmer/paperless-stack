@@ -2,7 +2,8 @@ services:
   gotenberg:
     image: docker.io/gotenberg/gotenberg:8.25
     container_name: gotenberg
-    env_file: 
+    env_file:
+      - ../../../.env
       - .env
     restart: unless-stopped
     command:

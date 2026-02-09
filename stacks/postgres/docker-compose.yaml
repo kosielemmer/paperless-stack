@@ -3,7 +3,8 @@ services:
     image: postgres:18
     restart: unless-stopped
     container_name: postgres
-    env_file: 
+    env_file:
+      - ../../../.env
       - .env
     volumes:
       - ./data:/var/lib/postgresql
