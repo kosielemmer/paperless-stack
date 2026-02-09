@@ -4,7 +4,7 @@ services:
     container_name: redis
     restart: unless-stopped
     env_file:
-      - ../../../.env
+      - ../../.env
       - .env
     volumes:
       - ./data:/data

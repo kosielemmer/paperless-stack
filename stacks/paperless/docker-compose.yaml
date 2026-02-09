@@ -4,7 +4,7 @@ services:
     container_name: paperless-ngx
     restart: unless-stopped
     env_file:
-      - ../../../.env
+      - ../../.env
       - .env
     ports:
       - "8000:8000"

@@ -6,7 +6,7 @@ services:
     ports:
       - "3002:8080"
     env_file:
-      - ../../../.env
+      - ../../.env
       - .env
     volumes:
       - ./prompts:/app/prompts

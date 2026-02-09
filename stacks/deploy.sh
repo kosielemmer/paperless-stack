@@ -16,7 +16,16 @@ echo ""
 
 # Get the script directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT_DIR="$(dirname "$SCRIPT_DIR")"
 cd "$SCRIPT_DIR"
+
+# Source root .env file to get shared variables
+if [ -f "$ROOT_DIR/.env" ]; then
+    set -a
+    source "$ROOT_DIR/.env"
+    set +a
+    export TIMEZONE NFS_SERVER_IP HOST_IP DOCKER_NETWORK
+fi
 
 # Function to check if a container is healthy/running
 wait_for_container() {
