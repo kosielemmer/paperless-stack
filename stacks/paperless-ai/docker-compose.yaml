@@ -1,0 +1,19 @@
+services:
+  paperless-ai:
+    image: clusterzx/paperless-ai:latest
+    container_name: paperless-ai
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+    networks:
+      paperless-stack:
+        aliases:
+          - paperless-ai
+
+networks:
+  paperless-stack:
+    external: true

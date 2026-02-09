@@ -1,0 +1,25 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    env_file:
+      - .env
+    volumes:
+      - ./data/:/root/.ollama
+      - ./models:/ollama-models
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    networks:
+      paperless-stack:
+        aliases:
+          - ollama
+
+networks:
+  paperless-stack:
+    external: true

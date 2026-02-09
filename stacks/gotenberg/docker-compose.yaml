@@ -1,0 +1,19 @@
+services:
+  gotenberg:
+    image: docker.io/gotenberg/gotenberg:8.25
+    container_name: gotenberg
+    env_file: 
+      - .env
+    restart: unless-stopped
+    command:
+      - "gotenberg"
+      - "--chromium-disable-javascript=true"
+      - "--chromium-allow-list=file:///tmp/.*"
+    networks:
+      paperless-stack:
+        aliases:
+          - gotenberg
+
+networks:
+  paperless-stack:
+    external: true

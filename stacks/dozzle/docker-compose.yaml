@@ -1,0 +1,20 @@
+services:
+  dozzle:
+    image: amir20/dozzle:latest
+    restart: unless-stopped
+    container_name: dozzle
+    env_file: 
+      - .env
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./data:/data
+    ports:
+      - "8080:8080"
+    networks:
+      paperless-stack:
+        aliases:
+          - dozzle
+
+networks:
+  paperless-stack:
+    external: true

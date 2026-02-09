@@ -1,6 +1,9 @@
 # Paperless Stack
 
-Docker Compose stack for running Paperless-ngx with optional local AI capabilities.
+Docker Compose stack for running Paperless-ngx with optional local AI capabilities. Each service is separated into its own self-contained stack for easy management.
+
+> **📁 All services are in the [`stacks/`](stacks/) directory.**  
+> See [`stacks/README.md`](stacks/README.md) for detailed documentation and [`stacks/IMPORT-GUIDE.md`](stacks/IMPORT-GUIDE.md) for importing into Arcane.
 
 ## Quick Start
 
@@ -14,14 +17,25 @@ Docker Compose stack for running Paperless-ngx with optional local AI capabiliti
 2. **Edit environment files**
 
    Update passwords and secrets in each service's `.env` file:
-   - `./paperless/.env` - Paperless configuration
-   - `./postgres/.env` - Database credentials (must match Paperless config)
+   - `./stacks/paperless/.env` - Paperless configuration
+   - `./stacks/postgres/.env` - Database credentials (must match Paperless config)
    - Other service `.env` files as needed
+
+   All services are located in the `stacks/` directory, each with its own compose file, environment, and data.
 
 3. **Start the stack**
 
+   Create the shared network first:
    ```bash
-   docker compose up -d
+   cd stacks
+   ./create-network.sh
+   ```
+
+   Then deploy services (see `stacks/README.md` for recommended order):
+   ```bash
+   cd postgres && docker compose up -d && cd ..
+   cd redis && docker compose up -d && cd ..
+   # ... continue for other services
    ```
 
 4. **Create admin account**
@@ -34,11 +48,11 @@ Docker Compose stack for running Paperless-ngx with optional local AI capabiliti
    - Open Open WebUI at <http://localhost:3001> and pull models:
      - `llama3.2:3b` (lightweight, for metadata suggestions and document reasoning)
      - `minicpm-v:8b` (vision model, for improved OCR)
-     - These should match the models listed in  `./paperless-ai/.env` and `./paperless-gpt/.env
+       - These should match the models listed in `./stacks/paperless-ai/.env` and `./stacks/paperless-gpt/.env`
    - In Paperless, go to Profile → API Tokens → Generate
-   - Copy the token and add it to `./paperless-ai/.env` and `./paperless-gpt/.env`
-   - Update `./paperless-ai/.env` with Paperless username
-   - Restart services: `docker compose restart`
+    - Copy the token and add it to `./stacks/paperless-ai/.env` and `./stacks/paperless-gpt/.env`
+    - Update `./stacks/paperless-ai/.env` with Paperless username
+    - Restart services: `cd stacks/paperless-ai && docker compose restart`
 
 **The AI components are entirely optional** and can be disabled by commenting them out. Paperless works great without AI.
 

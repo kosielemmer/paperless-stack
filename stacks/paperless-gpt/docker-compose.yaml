@@ -1,0 +1,19 @@
+services:
+  paperless-gpt:
+    image: icereed/paperless-gpt:latest
+    container_name: paperless-gpt
+    restart: unless-stopped
+    ports:
+      - "3002:8080"
+    env_file:
+      - .env
+    volumes:
+      - ./prompts:/app/prompts
+    networks:
+      paperless-stack:
+        aliases:
+          - paperless-gpt
+
+networks:
+  paperless-stack:
+    external: true

@@ -1,0 +1,19 @@
+services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:latest
+    container_name: open-webui
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "3001:8080"
+    volumes:
+      - ./data:/app/backend/data
+    networks:
+      paperless-stack:
+        aliases:
+          - open-webui
+
+networks:
+  paperless-stack:
+    external: true

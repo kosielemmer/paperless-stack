@@ -1,0 +1,23 @@
+services:
+  paperless:
+    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    container_name: paperless-ngx
+    restart: unless-stopped
+    env_file: 
+      - .env
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/usr/src/paperless/data
+      - ./media:/usr/src/paperless/media
+      - ./export:/usr/src/paperless/export
+      - ./consume:/usr/src/paperless/consume
+    networks:
+      paperless-stack:
+        aliases:
+          - paperless
+          - paperless-ngx
+
+networks:
+  paperless-stack:
+    external: true

@@ -1,0 +1,17 @@
+services:
+  postgres:
+    image: postgres:18
+    restart: unless-stopped
+    container_name: postgres
+    env_file: 
+      - .env
+    volumes:
+      - ./data:/var/lib/postgresql
+    networks:
+      paperless-stack:
+        aliases:
+          - postgres
+
+networks:
+  paperless-stack:
+    external: true
