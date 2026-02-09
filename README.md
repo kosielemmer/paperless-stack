@@ -25,13 +25,21 @@ Docker Compose stack for running Paperless-ngx with optional local AI capabiliti
 
 3. **Start the stack**
 
+   **Option A: Automated (Recommended)**
+   ```bash
+   cd stacks
+   ./deploy.sh
+   ```
+
+   **Option B: Manual deployment**
+   
    Create the shared network first:
    ```bash
    cd stacks
    ./create-network.sh
    ```
 
-   Then deploy services (see `stacks/README.md` for recommended order):
+   Then deploy services individually (see `stacks/README.md` for recommended order):
    ```bash
    cd postgres && docker compose up -d && cd ..
    cd redis && docker compose up -d && cd ..

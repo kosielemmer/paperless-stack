@@ -40,6 +40,22 @@ Or manually:
 docker network create paperless-stack
 ```
 
+## Automated Deployment
+
+For convenience, use the provided scripts to deploy/shutdown all services in the correct order:
+
+**Deploy all services:**
+```bash
+./deploy.sh
+```
+
+**Shutdown all services:**
+```bash
+./shutdown.sh
+```
+
+These scripts handle the deployment order automatically, wait for services to be ready, and provide colored status output.
+
 ## Deployment Order
 
 For proper functionality, deploy services in this order:
