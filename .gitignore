@@ -1,0 +1,39 @@
+# Data directories - created and managed by Docker containers
+stacks/*/data/
+!stacks/*/data/.gitkeep
+
+# Paperless-specific data directories
+stacks/paperless/consume/
+stacks/paperless/media/
+stacks/paperless/export/
+!stacks/paperless/consume/.gitkeep
+!stacks/paperless/media/.gitkeep
+!stacks/paperless/export/.gitkeep
+
+# Model directories
+stacks/ollama/models/
+!stacks/ollama/models/.gitkeep
+
+# Runtime and temporary files
+*.log
+*.pid
+*.sock
+*.db
+*.db-shm
+*.db-wal
+
+# SSH keys
+stacks/*/data/id_*
+*.pub
+
+# Database files
+*.sqlite
+*.sqlite3
+
+# Cache directories
+stacks/*/data/cache/
+stacks/*/data/vector_db/
+
+# Environment-specific overrides (optional)
+# .env.local
+# .env.*.local
